@@ -1,4 +1,5 @@
-const staticCache = "site-static-two";
+const staticCache = "site-static-2.0";
+// const dyamaicCache="dynamic-site-version-1.0"
 const assets = [
   "/",
   "index.html",
@@ -11,9 +12,9 @@ const assets = [
   "manifest.json",
   "%PUBLIC_URL%/logo192.png",
   "%PUBLIC_URL%/favicon.ico",
-  "https://mui.com/",
-  // "Fetch⚙ manifest.json", 
+  "https://mui.com/", 
   "favicon.ico",
+  "chunk.js",
 ];
 
 self.addEventListener("install", (event) => {
@@ -21,10 +22,12 @@ self.addEventListener("install", (event) => {
     caches.open(staticCache).then((cache) => {
       console.log(caches.toString(), "cache is storing  in local system")
       cache.addAll(assets);
-    })
+    })  
   );
   console.log("Service worker installed");
 });
+
+
 
 self.addEventListener("activate", (event) => {
   // console.log("Service worker activated");
@@ -32,6 +35,7 @@ self.addEventListener("activate", (event) => {
 return Promise.all(keys.filter(key => key !==staticCache).map(key => caches.delete(key)));
   }))
 });
+
 
 self.addEventListener("fetch", (event) => {
   event.respondWith(
@@ -41,4 +45,3 @@ self.addEventListener("fetch", (event) => {
   );
   console.log("Service worker fetching", event);
 });
-
