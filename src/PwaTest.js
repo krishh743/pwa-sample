@@ -48,10 +48,11 @@ export default function PwaTest() {
           email,
         }),
       }
-    );
+      );
+      console.log(resp,"response from firebase");
   };
 
- 
+
 
   return (
     <ThemeProvider theme={theme}>
